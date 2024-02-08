@@ -38,6 +38,9 @@ struct Recipes3VersionedSchema: VersionedSchema {
     static var versionIdentifier = Schema.Version(1, 0, 0)
 
     static var models: [any PersistentModel.Type] = [
-        Item.self,
+/*        Ingredient.self,
+        Amount.self,
+        IngredientAmount.self,
+        Recipe.self */
     ]
 }
