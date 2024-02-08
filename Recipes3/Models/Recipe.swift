@@ -55,7 +55,7 @@ enum Unit: Codable {
 }
 
 // One ingredient that may appear in a recipe.
-// @Model
+@Model
 final class Ingredient {
     var name: String
     var phase: IngredientPhase?
@@ -70,7 +70,7 @@ final class Ingredient {
     }
 }
 
-// @Model
+@Model
 final class Amount {
     var quantity: Float32
     var unit: Unit
@@ -98,7 +98,7 @@ final class Amount {
     }
 }
 
-// @Model
+@Model
 final class IngredientAmount: Identifiable {
     var ingredient: Ingredient
     var amount: Amount
@@ -113,7 +113,7 @@ final class IngredientAmount: Identifiable {
     }
 }
 
-// @Model
+@Model
 final class Recipe: Identifiable {
     var title: String
     var categories: [RecipeCategory]

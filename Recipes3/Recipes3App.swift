@@ -10,10 +10,19 @@ import SwiftData
 import UniformTypeIdentifiers
 
 @main
+@MainActor
 struct Recipes3App: App {
+    @Environment(\.modelContext) private var modelContext
+    
     var body: some Scene {
-        DocumentGroup(editing: .itemDocument, migrationPlan: Recipes3MigrationPlan.self) {
-            ContentView()
+        DocumentGroup(editing: .itemDocument, migrationPlan: Recipes3MigrationPlan.self,
+                      editor: { ContentView() },
+                      prepareDocument: initialRecipes)
+    }
+    
+    func initialRecipes(modContext: ModelContext) {
+        for recipe in allRecipes {
+            modContext.insert(recipe)
         }
     }
 }
@@ -38,9 +47,9 @@ struct Recipes3VersionedSchema: VersionedSchema {
     static var versionIdentifier = Schema.Version(1, 0, 0)
 
     static var models: [any PersistentModel.Type] = [
-/*        Ingredient.self,
+        Ingredient.self,
         Amount.self,
         IngredientAmount.self,
-        Recipe.self */
+        Recipe.self
     ]
 }

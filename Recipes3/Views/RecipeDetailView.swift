@@ -9,10 +9,11 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     @Binding var selection: String?
+    let recipes: [Recipe]
 
     private var recipe: Recipe? {
         if let s = selection {
-            for r in allRecipes {
+            for r in recipes {
                 if r.title == s {
                     return r
                 }

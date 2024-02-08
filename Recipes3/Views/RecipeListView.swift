@@ -9,10 +9,11 @@ import SwiftUI
 
 struct RecipeListView: View {
     @Binding var selection: String?
+    let recipes: [Recipe]
     let selectedCategory: RecipeCategory
     
     var body: some View {
-        List(recipes, selection: $selection, rowContent: {
+        List(selectedRecipes, selection: $selection, rowContent: {
             recipe in
             NavigationLink(value: recipe.title, label: {
                 Text(recipe.title)
@@ -20,11 +21,11 @@ struct RecipeListView: View {
         })
     }
     
-    private var recipes: [Recipe] {
+    private var selectedRecipes: [Recipe] {
         if selectedCategory == .all {
-            return allRecipes
+            return recipes
         } else {
-            return allRecipes.filter({$0.categories.contains(selectedCategory)})
+            return recipes.filter({$0.categories.contains(selectedCategory)})
         }
     }
 }

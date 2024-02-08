@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @Query private var recipes: [Recipe]
     @Environment(\.modelContext) private var modelContext
 
     @State private var selectedCategory: RecipeCategory? = RecipeCategory.all
@@ -19,10 +20,11 @@ struct ContentView: View {
             CategoryView(selection: $selectedCategory)
                 .navigationSplitViewColumnWidth(min: 180, ideal: 200)
         } content: {
-            RecipeListView(selection: $selectedRecipeTitle, selectedCategory: selectedCategory ?? RecipeCategory.all)
+            RecipeListView(selection: $selectedRecipeTitle, recipes: recipes,
+                           selectedCategory: selectedCategory ?? RecipeCategory.all)
                 .navigationSplitViewColumnWidth(min: 180, ideal: 200)
         } detail: {
-            RecipeDetailView(selection: $selectedRecipeTitle)
+            RecipeDetailView(selection: $selectedRecipeTitle, recipes: recipes)
         }
     }
 }
